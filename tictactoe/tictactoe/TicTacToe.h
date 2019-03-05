@@ -4,6 +4,8 @@
 #pragma once
 #include <string>
 
+using std::string;
+
 const int kBoardLength = 9;
 const int kBoardDimension = 3;
 const int kStartingSquare = 0;
@@ -13,6 +15,10 @@ const int kLengthofTwoRows = 6;
 
 enum TicTacToeState { UnreachableState, Xwins, Owins, NoWinner, InvalidInput };
 
-TicTacToeState CheckTicTacToeBoard(std::string board);
+TicTacToeState CheckTicTacToeBoard(string board);
+
+int CountNumOfX(string board);
+
+int CountNumOfO(string board);
 
 #endif
