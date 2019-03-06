@@ -49,12 +49,16 @@ TEST_CASE("DiagonalStartingFromRight_XWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("OOXOXXX..") == Xwins);
 }
 
-TEST_CASE("Two_XWinner_Board") {
+TEST_CASE("TwoXWinners_XWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXXXOOXOO") == Xwins);
 }
 
-TEST_CASE("LowerAndUpperCase_XWin_Board") {
-	REQUIRE(CheckTicTacToeBoard(".xO.X.oX.") == Xwins);
+TEST_CASE("TwoDiagonalXWinners_XWin_Board") {
+	REQUIRE(CheckTicTacToeBoard("XOXOXOXOX") == Xwins);
+}
+
+TEST_CASE("LowerAndUpperCaseAndSpecialCharacters_XWin_Board") {
+	REQUIRE(CheckTicTacToeBoard(".xO}X.oX%") == Xwins);
 }
 
 //Tests for when O is the winner.
@@ -90,8 +94,8 @@ TEST_CASE("DiagonalStartingFromRight_OWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXOXOOOX.") == Owins);
 }
 
-TEST_CASE("LowerAndUpperCase_OWin_Board") {
-	REQUIRE(CheckTicTacToeBoard("xO..oX.oX") == Owins);
+TEST_CASE("LowerAndUpperCaseAndSpecialCharacters_OWin_Board") {
+	REQUIRE(CheckTicTacToeBoard("xO}{oX#oX") == Owins);
 }
 
 //Tests for Invalid Input cases.
@@ -116,12 +120,20 @@ TEST_CASE("Empty_InvalidInput_Board") {
 }
 
 //Tests for Unreachable State cases.
+TEST_CASE("TwoDiaganolXWinnerWithInsufficientO_UnreachableState_Board") {
+	REQUIRE(CheckTicTacToeBoard("XXXXOOXO.") == UnreachableState);
+}
+
 TEST_CASE("AllX_UnreachableState_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXXXXXXXX") == UnreachableState);
 }
 
 TEST_CASE("AllO_UnreachableState_Board") {
 	REQUIRE(CheckTicTacToeBoard("OOOOOOOOO") == UnreachableState);
+}
+
+TEST_CASE("XWinWithNoOOnBoard_UnreachableState_Board") {
+	REQUIRE(CheckTicTacToeBoard("XXX......") == UnreachableState);
 }
 
 TEST_CASE("TwoMoreXThenO_UnreachableState_Board") {
