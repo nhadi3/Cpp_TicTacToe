@@ -9,6 +9,7 @@ TicTacToeState CheckTicTacToeBoard(string board) {
 		return InvalidInput;
 	}
 
+	//Converts board string to a char array of the board.
 	string boardgiven = board;
 	char board_array[kBoardLength];
 	for (int i = 0; i < kBoardLength; i++) {
@@ -27,8 +28,8 @@ TicTacToeState CheckTicTacToeBoard(string board) {
 }
 
 bool IsUnreachableState(char board_array[]) {
-	int xcount = CountNumOfCharactersInString(board_array, 'x');
-	int ocount = CountNumOfCharactersInString(board_array, 'o');
+	int xcount = CountNumOfCharactersInCharArray(board_array, 'x');
+	int ocount = CountNumOfCharactersInCharArray(board_array, 'o');
 
 	if (xcount < ocount) {
 		return true;
@@ -51,48 +52,64 @@ bool IsInvalidInput(string board) {
 }
 
 bool XIsWinner(char board_array[]) {
+	//Checks for Column wins for X.
 	for (int i = 0; i < kBoardDimension; i++) {
 		if ((board_array[i] == 'x') && (board_array[i] == board_array[i + kBoardDimension]) && 
-			(board_array[i + kBoardDimension] == board_array[i + kLengthofTwoRows])) {
+			(board_array[i + kBoardDimension] == board_array[i + kBottomLeftSquare])) {
 			return true;
 		}
 	}
+
+	//Checks for Row wins for X.
 	for (int i = 0; i < kBoardLength; i+=kBoardDimension) {
 		if ((board_array[i] == 'x') && (board_array[i] == board_array[i + kTopMiddleSquare]) &&
 			(board_array[i + kTopMiddleSquare] == board_array[i + kTopRightSquare])) {
 			return true;
 		}
 	}
+
+	//Checks for Diagonal wins for X.
 	if ((board_array[kMiddleSquare] == 'x') && 
-		(((board_array[kStartingSquare] == board_array[kMiddleSquare]) && (board_array[kMiddleSquare] == board_array[kLastSquare])) ||
-		((board_array[kTopRightSquare] == board_array[kMiddleSquare]) && (board_array[kMiddleSquare] == board_array[kBottomLeftSquare])))) {
+		(((board_array[kStartingSquare] == board_array[kMiddleSquare]) && 
+		(board_array[kMiddleSquare] == board_array[kLastSquare])) ||
+		((board_array[kTopRightSquare] == board_array[kMiddleSquare]) && 
+			(board_array[kMiddleSquare] == board_array[kBottomLeftSquare])))) {
 		return true;
 	}
+
 	return false;
 }
 
 bool OIsWinner(char board_array[]) {
+	//Checks for Column wins for O.
 	for (int i = 0; i < kBoardDimension; i++) {
 		if ((board_array[i] == 'o') && (board_array[i] == board_array[i + kBoardDimension]) &&
-			(board_array[i + kBoardDimension] == board_array[i + kLengthofTwoRows])) {
+			(board_array[i + kBoardDimension] == board_array[i + kBottomLeftSquare])) {
 			return true;
 		}
 	}
+
+	//Checks for Row wins for O.
 	for (int i = 0; i < kBoardLength; i += kBoardDimension) {
 		if ((board_array[i] == 'o') && (board_array[i] == board_array[i + kTopMiddleSquare]) &&
 			(board_array[i + kTopMiddleSquare] == board_array[i + kTopRightSquare])) {
 			return true;
 		}
 	}
+
+	//Checks for Diagonal wins for O.
 	if ((board_array[kMiddleSquare] == 'o') &&
-		(((board_array[kStartingSquare] == board_array[kMiddleSquare]) && (board_array[kMiddleSquare] == board_array[kLastSquare])) ||
-		((board_array[kTopRightSquare] == board_array[kMiddleSquare]) && (board_array[kMiddleSquare] == board_array[kBottomLeftSquare])))) {
+		(((board_array[kStartingSquare] == board_array[kMiddleSquare]) && 
+		(board_array[kMiddleSquare] == board_array[kLastSquare])) ||
+		((board_array[kTopRightSquare] == board_array[kMiddleSquare]) && 
+			(board_array[kMiddleSquare] == board_array[kBottomLeftSquare])))) {
 		return true;
 	}
+
 	return false;
 }
 
-int CountNumOfCharactersInString(char board_array[], char c) {
+int CountNumOfCharactersInCharArray(char board_array[], char c) {
 	int count = 0;
 	for (int i = 0; i < kBoardLength; i++) {
 		if (board_array[i] == c) {
