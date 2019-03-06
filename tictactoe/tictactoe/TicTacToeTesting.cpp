@@ -1,5 +1,5 @@
-#define CATCH_CONFIG_MAIN
 
+#define CATCH_CONFIG_MAIN
 #include "TicTacToe.h"
 #include "catch.hpp"
 
@@ -37,8 +37,11 @@ TEST_CASE("ColumnThree_XWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("O.XXOX.OX") == Xwins);
 }
 
-TEST_CASE("Diagonal_XWin_Board") {
+TEST_CASE("DiagonalStartingFromLeft_XWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("XO.XXOO.X") == Xwins);
+}
+
+TEST_CASE("DiagonalStartingFromRight_XWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("OOXOXXX..") == Xwins);
 }
 
@@ -71,8 +74,11 @@ TEST_CASE("ColumnThree_OWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("XOOXXO.XO") == Owins);
 }
 
-TEST_CASE("Diagonal_OWin_Board") {
+TEST_CASE("DiagonalStartingFromLeft_OWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("OXXOOXX.O") == Owins);
+}
+
+TEST_CASE("DiagonalStartingFromRight_OWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXOXOOOX.") == Owins);
 }
 
@@ -81,7 +87,7 @@ TEST_CASE("TooLittle_InvalidInput_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXXO.O..") == InvalidInput);
 }
 
-TEST_CASE("TooLittle_InvalidInput_Board") {
+TEST_CASE("TooMuch_InvalidInput_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXXO.O....") == InvalidInput);
 }
 
