@@ -2,7 +2,6 @@
 #include <string>
 #include <ctype.h>
 #include <stdio.h>
-#include <iostream>
 
 TicTacToeState CheckTicTacToeBoard(string board) {
 	if (IsInvalidInput(board)) {
@@ -32,6 +31,8 @@ bool IsUnreachableState(char board_array[]) {
 	int ocount = CountNumOfCharactersInCharArray(board_array, 'o');
 
 	if (xcount < ocount) {
+		return true;
+	} else if (xcount - ocount > 1) {
 		return true;
 	} else if (XIsWinner(board_array) && (xcount == ocount)) {
 		return true;

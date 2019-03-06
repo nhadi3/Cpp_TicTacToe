@@ -4,6 +4,10 @@
 #include "catch.hpp"
 
 //Tests for when there is no winner.
+TEST_CASE("SpecialCharacters_NoWinner_Board") {
+	REQUIRE(CheckTicTacToeBoard("@#*$&}|:~") == NoWinner);
+}
+
 TEST_CASE("Simple_NoWinner_Board") {
 	REQUIRE(CheckTicTacToeBoard("O...X.X..") == NoWinner);
 }
@@ -49,6 +53,10 @@ TEST_CASE("Two_XWinner_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXXXOOXOO") == Xwins);
 }
 
+TEST_CASE("LowerAndUpperCase_XWin_Board") {
+	REQUIRE(CheckTicTacToeBoard(".xO.X.oX.") == Xwins);
+}
+
 //Tests for when O is the winner.
 TEST_CASE("RowOne_OWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("OOO.X.XX.") == Owins);
@@ -82,16 +90,44 @@ TEST_CASE("DiagonalStartingFromRight_OWin_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXOXOOOX.") == Owins);
 }
 
+TEST_CASE("LowerAndUpperCase_OWin_Board") {
+	REQUIRE(CheckTicTacToeBoard("xO..oX.oX") == Owins);
+}
+
 //Tests for Invalid Input cases.
-TEST_CASE("TooLittle_InvalidInput_Board") {
+TEST_CASE("ReallyLittleInput_InvalidInput_Board") {
+	REQUIRE(CheckTicTacToeBoard("X") == InvalidInput);
+}
+
+TEST_CASE("ReallyLongInput_InvalidInput_Board") {
+	REQUIRE(CheckTicTacToeBoard("XXXO.O..XXXOOOO.....X.X.O.X.O....X...OOX..") == InvalidInput);
+}
+
+TEST_CASE("OneLessInput_InvalidInput_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXXO.O..") == InvalidInput);
 }
 
-TEST_CASE("TooMuch_InvalidInput_Board") {
+TEST_CASE("OneMoreInput_InvalidInput_Board") {
 	REQUIRE(CheckTicTacToeBoard("XXXO.O....") == InvalidInput);
 }
 
+TEST_CASE("Empty_InvalidInput_Board") {
+	REQUIRE(CheckTicTacToeBoard("") == InvalidInput);
+}
+
 //Tests for Unreachable State cases.
+TEST_CASE("AllX_UnreachableState_Board") {
+	REQUIRE(CheckTicTacToeBoard("XXXXXXXXX") == UnreachableState);
+}
+
+TEST_CASE("AllO_UnreachableState_Board") {
+	REQUIRE(CheckTicTacToeBoard("OOOOOOOOO") == UnreachableState);
+}
+
+TEST_CASE("TwoMoreXThenO_UnreachableState_Board") {
+	REQUIRE(CheckTicTacToeBoard("X..X.....") == UnreachableState);
+}
+
 TEST_CASE("MoreO_UnreachableState_Board") {
 	REQUIRE(CheckTicTacToeBoard("OXX.O...O") == UnreachableState);
 }
